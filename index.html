@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="shortcut icon" type="image/png" href="./assets/imgs/favicon/favicon.png"/>
+    <link rel="stylesheet" href="./assets/musicPlayer.css" type="text/css">
+    <script type="text/javascript" src="./assets/musicPlayer.js" defer></script>
+    <title>Music Player by Nghiadx</title>
+</head>
+<body>
+    
+    <div id="music-player">
+        <div id="song-info">
+            <!-- Song name -->
+            <div id="song-name" class="song-name">
+                Tên bài hát&
+            </div>
+            <!-- Song CD -->
+            <div class="song-cd">
+                <div id="song-cd" class="cd"></div>
+            </div>
+            <!-- Song control -->
+            <div class="song-control">
+                <div id="repeat-btn" class="btn-style" title="Lặp bài hiện tại"><i class="fas fa-redo"></i></div>
+                <div id="prev-btn" class="btn-style" title="Bài trước đó"><i class="fas fa-step-backward"></i></div>
+                <div id="play-btn" title="Phát / Tạm dừng"><i class="fas fa-play"></i><div id="waiting"></div></div>
+                <div id="next-btn" class="btn-style" title="Bài tiếp theo"><i class="fas fa-step-forward"></i></div>
+                <div id="random-btn" class="btn-style" title="Phát ngẫu nhiên"><i class="fas fa-random"></i></div>
+            </div>
+            <div class="song-progress">
+                <div id="current-time">00:00</div>
+                <div class="progress-bar">
+                    <!-- Progress Pseudo-->
+                    <div id="progress-bar">
+                        <div id="progress-bar-pseudo">
+                            <div id="progress-dot"></div>
+                        </div> 
+                    </div>
+
+                    <input name="song-progress" type="range" min="0" max="100" value="50" step="0.1">
+                </div>
+                <div id="total-time">00:00</div>
+            </div>
+        </div>
+
+        <div id="song-list">
+            <div class="no-song">Không có bài hát nào!</div>
+        </div>
+
+        <audio id="audio" src=""></audio>
+
+            <div id="wing-left"></div>
+        <div style="text-align: right;">
+            <div id="wing-right"></div>
+        </div>
+            
+    </div>
+    <script>
+        const MUSIC_LIST = [
+            {
+                id: 1,
+                name: 'Lần cuối',
+                singer: 'Ngọt Bands',
+                image: './assets/songs/imgs/lancuoi.jpg',
+                url: './assets/songs/Lancuoi.mp3'
+            },
+            {
+                id: 2,
+                name: 'Chạy Về Khóc Với Anh',
+                singer: 'Erik',
+                image: './assets/songs/imgs/chayVeKhocVoiAnh.jpg',
+                url: './assets/songs/YeuDuongKhoQuaThiChayVeKhocVoiAnh.mp3'
+            },
+            {
+                id: 3,
+                name: 'Ngày Đầu Tiên',
+                singer: 'Đức Phúc',
+                image: './assets/songs/imgs/ngayDauTien.jpg',
+                url: './assets/songs/NgayDauTien.mp3'
+            },
+            {
+                id: 4,
+                name: 'Không Thể Cùng Nhau Suốt Kiếp',
+                singer: 'Hòa Minzy-Đức Phúc-Erik',
+                image: './assets/songs/imgs/khongthecungnhausuotkiep.jpg',
+                url: './assets/songs/khongthecungnhausuotkiep.mp3'
+            },
+            {
+                id: 5,
+                name: 'The Monster',
+                singer: 'Eminem ft. Rihanna',
+                image: './assets/songs/imgs/theMonster.png',
+                url: './assets/songs/TheMonster.mp3'
+            },
+            {
+                id: 6,
+                name: 'Chờ Ngày Mưa Tan',
+                singer: 'Noo Phước Thịnh',
+                image: './assets/songs/imgs/choNgayMuaTan.jpg',
+                url: './assets/songs/choNgayMuaTan.mp3'
+            },
+            {
+                id: 7,
+                name: 'Nhớ Người Hay Nhớ',
+                singer: 'Sofia x Khói x Châu Đăng Khoa',
+                image: './assets/songs/imgs/nhoNguoiHayNho.jpg',
+                url: './assets/songs/NhoNguoiHayNho.mp3'
+            },
+            {
+                id: 8,
+                name: 'Cuộc Sống Em Ổn Không',
+                singer: 'Anh Tú',
+                image: './assets/songs/imgs/cuocSongEmOnKhong.jpg',
+                url: './assets/songs/CuocSongEmOnKhong.mp3'
+            },
+            {
+                id: 9,
+                name: 'Dạ Vũ',
+                singer: 'Tăng Duy Tân',
+                image: './assets/songs/imgs/daVu.jpg',
+                url: './assets/songs/DaVu.mp3'
+            },
+            {
+                id: 10,
+                name: 'Anh Đã Lạc Vào Remix',
+                singer: 'Green, Đại Mèo Remix',
+                image: './assets/songs/imgs/anhDaLacVaoRemix.jpg',
+                url: './assets/songs/anhDaLacVaoRemix.mp3'
+            },
+            {
+                id: 11,
+                name: 'Tình ca màu hồng',
+                singer: 'Hồ Văn Quý,Xám',
+                image: './assets/songs/imgs/TinhYeuMauHong.jpg',
+                url: './assets/songs/TinhYeuMauHong.mp3'
+            },
+            {
+                id: 12,
+                name: 'Tình Nhân Ơi',
+                singer: 'Superbrothers,Orange,Binz',
+                image: './assets/songs/imgs/TinhNhanOi.jpg',
+                url: './assets/songs/TinhNhanOi.mp3'
+            },
+        ];
+    </script>
+</body>
+</html>
