@@ -268,7 +268,7 @@ body::-webkit-scrollbar{
     padding-bottom: 12px;
 }
 #song-list::after{
-    content: 'My Love - ThuyTien ^^';
+    content: 'My Love - ZunZun ^^';
     position: absolute;
     bottom: 4px;
     left: 0;
@@ -279,23 +279,23 @@ body::-webkit-scrollbar{
 }
 @keyframes copy-right {
     0%{
-        content: 'My Love - ThuyTien ^^';
+        content: 'My Love - ZunZun ^^';
         transform: rotateY(0deg);
     }
     35%{
-        content: 'My Love - ThuyTien ^^';
+        content: 'My Love - ZunZun ^^';
         transform: rotateY(0deg);
     }
     50%{
-        content: 'My Love - ThuyTien ^^';
+        content: 'My Love - ZunZun ^^';
         transform: rotateY(720deg);
     }
     85%{
-        content: 'My Love - ThuyTien ^^';
+        content: 'My Love - ZunZun ^^';
         transform: rotateY(720deg);
     }
     100%{
-        content: 'My Love - ThuyTien ^^';
+        content: 'My Love - ZunZun ^^';
         transform: rotateY(0deg);
     }
     
